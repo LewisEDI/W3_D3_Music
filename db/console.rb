@@ -6,9 +6,9 @@ require_relative("../models/albulms")
 # Customer.delete_all()
 
 artist1 = Artist.new({'name' => 'Ross'})
-# customer1.save()
+artist1.save()
 
 albulm = Albulm.new({'title' => 'Life as a Coder', 'genre' => 'Alternative', 'artist_id' => artist1.id})
-# order1.save
+albulm.save()
 binding.pry
 nil
