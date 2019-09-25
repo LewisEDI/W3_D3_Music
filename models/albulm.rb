@@ -1,6 +1,6 @@
 require('pg')
 require_relative('../db/sql_runner')
-require_relative('artists')
+require_relative('artist')
 class Albulm
 
   attr_reader :id
@@ -22,9 +22,26 @@ class Albulm
       artist_id
     ) VALUES
     (
-      $1, $2, $3, $4
+      $1, $2, $3
     )
     RETURNING id"
     values = [@title, @genre, @artist_id]
     @id = SqlRunner.run(sql, values)[0]["id"].to_i
   end
+
+  def artist()
+    sql = "SELECT * FROM artist WHERE id = $1"
+    values = [@artist_id]
+    results = SqlRunner.run(sql, values)
+    hash = results[0]
+    artist = Artist.new(hash)
+    return artist
+  end
+
+  def self.all()
+    sql = "SELECT * FROM albulm"
+    albulms = SqlRunner.run(sql)
+    return albulms.map { |albulm| Albulm.new(albulm)  }
+  end
+
+end
