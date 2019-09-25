@@ -1,6 +1,8 @@
 require("pry")
 require_relative("../models/artist")
 require_relative("../models/albulm")
+Albulm.delete_all()
+Artist.delete_all()
 
 # PizzaOrder.delete_all()
 # Customer.delete_all()
